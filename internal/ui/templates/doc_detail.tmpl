@@ -1,0 +1,97 @@
+{{ define "doc_detail.tmpl" }}
+{{ template "layout" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/docs">API Docs</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{.APIDoc.Title}}</li>
+            </ol>
+        </nav>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>{{.APIDoc.Title}}</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Description:</strong> {{.APIDoc.Description}}</p>
+                <p><strong>Version:</strong> {{.APIDoc.Version}}</p>
+                <p><strong>URL:</strong> <a href="{{.APIDoc.URL}}" target="_blank">{{.APIDoc.URL}}</a></p>
+                <p><strong>Scraped:</strong> {{.APIDoc.CreatedAt.Format "Jan 02, 2006 15:04:05"}}</p>
+            </div>
+        </div>
+
+        <h3>Endpoints</h3>
+        {{if .APIDoc.Endpoints}}
+            {{range .APIDoc.Endpoints}}
+                <div class="endpoint">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="method method-{{lower .Method}}">{{.Method}}</span>
+                        <span class="path">{{.Path}}</span>
+                    </div>
+                    <p><strong>Summary:</strong> {{.Summary}}</p>
+                    {{if .Description}}
+                        <p><strong>Description:</strong> {{.Description}}</p>
+                    {{end}}
+
+                    {{if .Parameters}}
+                        <h5>Parameters</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>In</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{range .Parameters}}
+                                        <tr>
+                                            <td>{{.Name}}</td>
+                                            <td>{{.In}}</td>
+                                            <td>{{.Type}}</td>
+                                            <td>{{if .Required}}Yes{{else}}No{{end}}</td>
+                                            <td>{{.Description}}</td>
+                                        </tr>
+                                    {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{end}}
+
+                    {{if .Responses}}
+                        <h5>Responses</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Status Code</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{range .Responses}}
+                                        <tr>
+                                            <td>{{.StatusCode}}</td>
+                                            <td>{{.Description}}</td>
+                                        </tr>
+                                    {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{end}}
+                </div>
+            {{end}}
+        {{else}}
+            <p>No endpoints found in this API documentation.</p>
+        {{end}}
+    </div>
+</div>
+{{end}}

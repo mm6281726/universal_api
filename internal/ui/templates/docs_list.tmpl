@@ -1,0 +1,29 @@
+{{ define "docs_list.tmpl" }}
+{{ template "layout" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <h2>API Documentation</h2>
+
+        {{if .APIDocs}}
+            <div class="list-group">
+                {{range .APIDocs}}
+                    <a href="/docs/{{.ID}}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{.Title}}</h5>
+                            <small>{{.CreatedAt.Format "Jan 02, 2006 15:04:05"}}</small>
+                        </div>
+                        <p class="mb-1">{{.Description}}</p>
+                        <small>{{.URL}}</small>
+                    </a>
+                {{end}}
+            </div>
+        {{else}}
+            <p>No API documentation has been scraped yet.</p>
+            <p><a href="/" class="btn btn-primary">Scrape API Documentation</a></p>
+        {{end}}
+    </div>
+</div>
+{{end}}

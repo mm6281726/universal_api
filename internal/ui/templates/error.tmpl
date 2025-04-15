@@ -1,0 +1,15 @@
+{{ define "error.tmpl" }}
+{{ template "layout" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p>{{.Error}}</p>
+        </div>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{{end}}

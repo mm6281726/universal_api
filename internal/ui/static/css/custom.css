@@ -1,0 +1,65 @@
+/* Custom styles for Universal API */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.endpoint {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.method {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.method-get {
+    background-color: #28a745;
+}
+
+.method-post {
+    background-color: #007bff;
+}
+
+.method-put {
+    background-color: #fd7e14;
+}
+
+.method-delete {
+    background-color: #dc3545;
+}
+
+.method-patch {
+    background-color: #6f42c1;
+}
+
+.path {
+    font-family: monospace;
+    font-size: 1.1em;
+}
+
+.parameter {
+    margin-bottom: 5px;
+}
+
+.response {
+    margin-bottom: 5px;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}

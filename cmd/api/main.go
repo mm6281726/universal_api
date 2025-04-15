@@ -4,10 +4,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"universal_api/internal/models"
 	"universal_api/internal/scraper"
 	"universal_api/internal/storage"
+	"universal_api/internal/ui"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Global storage instance
@@ -49,6 +51,10 @@ func setupRoutes(r *gin.Engine) {
 		// Get a specific API doc by ID
 		api.GET("/docs/:id", getAPIDocByID)
 	}
+
+	// UI routes
+	uiHandler := ui.NewGinHandler(store)
+	uiHandler.RegisterRoutes(r)
 }
 
 // Handler to submit a new API documentation URL
